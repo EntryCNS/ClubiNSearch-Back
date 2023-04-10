@@ -29,7 +29,7 @@ public class RecruitmentController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<RecruitmentResponse> getRecruitmentListByClubName(
+    public List<RecruitmentResponse> getRecruitmentList(
             @RequestParam(value = "clubName", defaultValue = "") String clubName,
             @RequestParam(value = "search", defaultValue = "") String search,
             @RequestParam(value = "position", defaultValue = "") String position,

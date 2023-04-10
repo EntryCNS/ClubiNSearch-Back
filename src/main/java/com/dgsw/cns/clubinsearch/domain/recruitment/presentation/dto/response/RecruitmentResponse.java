@@ -12,6 +12,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class RecruitmentResponse {
 
+    private Long id;
+
     private String title;
 
     private String clubName;

@@ -19,6 +19,7 @@ public class Club {
 
     private String name;
 
+    @Builder.Default
     @OneToMany(mappedBy = "club", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Recruitment> recruitments = new HashSet<>();

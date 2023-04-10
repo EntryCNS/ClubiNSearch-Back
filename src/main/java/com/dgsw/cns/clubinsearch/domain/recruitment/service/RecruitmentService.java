@@ -5,16 +5,14 @@ import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
 import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.RecruitmentRepository;
+import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentsEmptyException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
-import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentListResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,33 +41,20 @@ public class RecruitmentService {
     }
 
     @Transactional(readOnly = true)
-    public List<RecruitmentResponse> getRecruitmentListByClubName(
+    public List<RecruitmentResponse> getRecruitmentList(
             String clubName,
             String search,
             String position,
             String employmentType) {
+        List<Recruitment> recruitments = recruitmentRepository.filterRecruitment(
+                clubName, search, position, employmentType);
 
-        if (clubName.isEmpty() && search.isEmpty() && position.isEmpty() && employmentType.isEmpty()) {
-            return getRecruitmentList();
+        if(recruitments.isEmpty()) {
+            throw RecruitmentsEmptyException.EXCEPTION;
         }
 
-        Club club = clubRepository.findAllByNameContaining(clubName)
-                .orElseThrow(() -> ClubNotFoundException.EXCEPTION);
-
-        List<Recruitment> recruitments = recruitmentRepository.findByClub_IdAndTitleAndPositionAndEmploymentType(
-                club.getId(), search, position, employmentType
-        );
         return recruitments.stream().map(
-                it -> new RecruitmentResponse(it.getTitle(), it.getClub().getName(), it.getPosition(), it.getEmploymentType())
-        ).collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
-    public List<RecruitmentResponse> getRecruitmentList() {
-        List<Recruitment> recruitment = recruitmentRepository.findAll();
-
-        return recruitment.stream().map(
-                it -> new RecruitmentResponse(it.getTitle(), it.getClub().getName(), it.getPosition(), it.getEmploymentType())
+                it -> new RecruitmentResponse(it.getId(), it.getTitle(), it.getClub().getName(), it.getPosition(), it.getEmploymentType())
         ).collect(Collectors.toList());
     }
 }

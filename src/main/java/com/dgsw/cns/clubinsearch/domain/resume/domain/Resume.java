@@ -17,7 +17,7 @@ public class Resume {
 
     private String name;
 
-    private String StudentNo;
+    private String studentNo;
 
     private String contact;
 

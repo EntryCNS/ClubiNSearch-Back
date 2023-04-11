@@ -37,4 +37,11 @@ public class RecruitmentController {
     ) {
         return recruitmentService.getRecruitmentList(clubName, search, position, employmentType);
     }
+
+    @GetMapping("/{id}")
+    public RecruitmentResponse getRecruitmentById(
+            @PathVariable Long id
+    ) {
+        return recruitmentService.getRecruitmentById(id);
+    }
 }

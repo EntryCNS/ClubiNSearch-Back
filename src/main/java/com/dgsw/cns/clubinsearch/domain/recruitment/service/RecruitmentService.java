@@ -5,6 +5,7 @@ import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
 import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.RecruitmentRepository;
+import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentsEmptyException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,5 +58,17 @@ public class RecruitmentService {
         return recruitments.stream().map(
                 it -> new RecruitmentResponse(it.getId(), it.getTitle(), it.getClub().getName(), it.getPosition(), it.getEmploymentType())
         ).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public RecruitmentResponse getRecruitmentById(
+            Long id
+    ) {
+        Recruitment recruitment = recruitmentRepository.findById(id)
+                .orElseThrow(() -> RecruitmentNotFoundException.EXCEPTION);
+
+        return new RecruitmentResponse(
+                recruitment.getId(), recruitment.getTitle(), recruitment.getClub().getName(), recruitment.getPosition(), recruitment.getEmploymentType()
+        );
     }
 }

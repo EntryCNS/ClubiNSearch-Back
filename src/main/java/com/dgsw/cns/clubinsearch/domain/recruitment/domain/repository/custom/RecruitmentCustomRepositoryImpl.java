@@ -15,7 +15,7 @@ public class RecruitmentCustomRepositoryImpl implements RecruitmentCustomReposit
         private final JPAQueryFactory jpaQueryFactory;
 
         @Override
-        public List<Recruitment> filterRecruitment(String clubName, String search, String position, String employmentType) {
+        public List<Recruitment> searchRecruitment(String clubName, String search, String position, String employmentType) {
              return jpaQueryFactory
                     .selectFrom(recruitment)
                     .where(

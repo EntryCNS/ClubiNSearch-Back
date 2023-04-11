@@ -48,7 +48,7 @@ public class RecruitmentService {
             String search,
             String position,
             String employmentType) {
-        List<Recruitment> recruitments = recruitmentRepository.filterRecruitment(
+        List<Recruitment> recruitments = recruitmentRepository.searchRecruitment(
                 clubName, search, position, employmentType);
 
         if(recruitments.isEmpty()) {

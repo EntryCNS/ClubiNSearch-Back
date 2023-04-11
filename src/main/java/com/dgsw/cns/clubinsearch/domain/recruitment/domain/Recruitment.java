@@ -1,11 +1,13 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.domain;
 
 import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
+import com.dgsw.cns.clubinsearch.domain.resume.domain.Resume;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -29,5 +31,13 @@ public class Recruitment {
     @JsonBackReference
     @JoinColumn(name = "club_id")
     private Club club;
+
+    @OneToMany(mappedBy = "recruitment", orphanRemoval = true, cascade = CascadeType.ALL)
+    private Set<Resume> resumes = new HashSet<>();
+
+    public void addResume(Resume resume) {
+        resume.setRecruitment(this);
+        resumes.add(resume);
+    }
 
 }

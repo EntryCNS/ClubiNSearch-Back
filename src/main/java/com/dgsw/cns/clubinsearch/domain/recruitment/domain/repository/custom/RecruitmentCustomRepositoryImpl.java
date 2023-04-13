@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.custom;
 
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ public class RecruitmentCustomRepositoryImpl implements RecruitmentCustomReposit
         private final JPAQueryFactory jpaQueryFactory;
 
         @Override
-        public List<Recruitment> searchRecruitment(String clubName, String search, String position, String employmentType) {
+        public List<Recruitment> searchRecruitment(String clubName, String search, String position, EmploymentType employmentType) {
              return jpaQueryFactory
                     .selectFrom(recruitment)
                     .where(
@@ -34,8 +35,8 @@ public class RecruitmentCustomRepositoryImpl implements RecruitmentCustomReposit
             return position.isEmpty() ? null : recruitment.position.eq(position);
         }
 
-        private BooleanExpression eqEmploymentType(String employmentType) {
-            return employmentType.isEmpty() ? null : recruitment.employmentType.eq(employmentType);
+        private BooleanExpression eqEmploymentType(EmploymentType employmentType) {
+            return employmentType == null ? null : recruitment.employmentType.eq(employmentType);
         }
 
         private BooleanExpression eqClubName(String clubName) {

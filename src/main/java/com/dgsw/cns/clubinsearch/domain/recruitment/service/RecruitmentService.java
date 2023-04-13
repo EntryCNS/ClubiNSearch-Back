@@ -4,6 +4,7 @@ import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
 import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
 import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.RecruitmentRepository;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentsEmptyException;
@@ -46,7 +47,7 @@ public class RecruitmentService {
             String clubName,
             String search,
             String position,
-            String employmentType) {
+            EmploymentType employmentType) {
         List<Recruitment> recruitments = recruitmentRepository.searchRecruitment(
                 clubName, search, position, employmentType);
 

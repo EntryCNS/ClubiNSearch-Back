@@ -1,5 +1,6 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request;
 
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +21,7 @@ public class CreateRecruitmentRequest {
     @NotBlank(message = "채용 포지션이 필요합니다")
     private String position;
 
-    @NotBlank(message = "채용 형식이 필요합니다")
-    private String employmentType;
+    private EmploymentType employmentType;
 
     @NotBlank(message = "채용에 관한 자세한 내용이 필요합니다")
     private String detailContent;

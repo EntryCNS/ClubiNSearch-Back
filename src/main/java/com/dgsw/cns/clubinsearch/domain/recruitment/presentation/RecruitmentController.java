@@ -1,5 +1,6 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.presentation;
 
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.RecruitmentService;
@@ -33,7 +34,7 @@ public class RecruitmentController {
             @RequestParam(value = "clubName", defaultValue = "") String clubName,
             @RequestParam(value = "search", defaultValue = "") String search,
             @RequestParam(value = "position", defaultValue = "") String position,
-            @RequestParam(value = "employmentType", defaultValue = "") String employmentType
+            @RequestParam(value = "employmentType", defaultValue = "") EmploymentType employmentType
     ) {
         return recruitmentService.getRecruitmentList(clubName, search, position, employmentType);
     }

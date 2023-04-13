@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response;
 
 import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,6 @@ public class RecruitmentResponse {
 
     private String position;
 
-    private String hiringType;
+    private EmploymentType employmentType;
 
 }

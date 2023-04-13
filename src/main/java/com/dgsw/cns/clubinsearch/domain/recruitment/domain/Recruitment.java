@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.domain;
 
 import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.Resume;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
@@ -22,7 +23,8 @@ public class Recruitment {
 
     private String position;
 
-    private String employmentType;
+    @Enumerated(EnumType.STRING)
+    private EmploymentType employmentType;
 
     private String detailContent;
 

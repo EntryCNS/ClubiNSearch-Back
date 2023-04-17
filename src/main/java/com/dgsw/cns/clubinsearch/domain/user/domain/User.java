@@ -1,6 +1,6 @@
 package com.dgsw.cns.clubinsearch.domain.user.domain;
 
-import com.dgsw.cns.clubinsearch.domain.user.Role;
+import com.dgsw.cns.clubinsearch.domain.user.domain.enums.Role;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

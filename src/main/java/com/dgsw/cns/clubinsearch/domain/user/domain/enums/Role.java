@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.domain.user;
+package com.dgsw.cns.clubinsearch.domain.user.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

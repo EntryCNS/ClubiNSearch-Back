@@ -20,7 +20,6 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
 
     private final ObjectMapper mapper;
-    private final FilterConfig filterConfig;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,12 +38,11 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**", "/api/resume/**","/api/token/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
                 .apply(new FilterConfig(jwtTokenProvider, mapper, authDetailsService));
-
 
         return http.build();
     }

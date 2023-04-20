@@ -25,6 +25,8 @@ public class Resume {
 
     private String link;
 
+    private String fileUrl;
+
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recruitment_id")

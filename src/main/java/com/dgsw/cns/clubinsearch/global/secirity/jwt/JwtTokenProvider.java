@@ -40,12 +40,12 @@ public class JwtTokenProvider {
         switch (type) {
             case ACCESS:
                 claims.put("type", type);
-                secretKey = jwtProperties.getAccessSecretKey();
+                secretKey = jwtProperties.getAccessKey();
                 exp = jwtProperties.getAccessExp();
                 break;
             case REFRESH:
                 claims.put("type", type);
-                secretKey = jwtProperties.getRefreshSecretKey();
+                secretKey = jwtProperties.getRefreshKey();
                 exp = jwtProperties.getRefreshExp();
                 break;
         }
@@ -76,7 +76,7 @@ public class JwtTokenProvider {
 
     public String refreshAccessToken(String refreshToken) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey(jwtProperties.getRefreshSecretKey()))
+                .setSigningKey(getSigningKey(jwtProperties.getRefreshKey()))
                 .build()
                 .parseClaimsJws(refreshToken)
                 .getBody();
@@ -87,7 +87,7 @@ public class JwtTokenProvider {
     public Claims validateToken(String accessToken) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey(jwtProperties.getAccessSecretKey()))
+                    .setSigningKey(getSigningKey(jwtProperties.getAccessKey()))
                     .build()
                     .parseClaimsJws(accessToken)
                     .getBody();

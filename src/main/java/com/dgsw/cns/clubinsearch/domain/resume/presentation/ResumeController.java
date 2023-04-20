@@ -5,6 +5,7 @@ import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.response.ResumeR
 import com.dgsw.cns.clubinsearch.domain.resume.service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class ResumeController {
     @PostMapping("/submit")
     @ResponseStatus(HttpStatus.CREATED)
     public void submitResume(
-            @RequestBody SubmitResumeRequest request) {
-        resumeService.submitResume(request);
+            @ModelAttribute SubmitResumeRequest request) {
+        resumeService.  submitResume(request);
     }
 
     @GetMapping("/list/{recruitmentId}")

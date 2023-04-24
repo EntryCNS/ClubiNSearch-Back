@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.global.secirity.principle;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.repository.UserRepository;
+import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundUserEmailException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,6 @@ public class AuthDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .map(AuthDetails::new)
-                .orElseThrow(() -> new RuntimeException("이메일 못찾음 ㅋㅋ"));
+                .orElseThrow(() -> NotFoundUserEmailException.EXCEPTION);
     }
 }

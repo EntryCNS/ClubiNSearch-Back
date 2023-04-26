@@ -2,6 +2,7 @@ package com.dgsw.cns.clubinsearch.domain.recruitment.presentation;
 
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
+import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentDetailResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class RecruitmentController {
     }
 
     @GetMapping("/{id}")
-    public RecruitmentResponse getRecruitmentById(
+    public RecruitmentDetailResponse getRecruitmentById(
             @PathVariable Long id
     ) {
         return recruitmentService.getRecruitmentById(id);

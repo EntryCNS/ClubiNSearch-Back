@@ -9,6 +9,7 @@ import com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.Recruitmen
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentsEmptyException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
+import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentDetailResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,8 @@ public class RecruitmentService {
             String position,
             EmploymentType employmentType) {
         List<Recruitment> recruitments = recruitmentRepository.searchRecruitment(
-                clubName, search, position, employmentType);
+                clubName, search, position, employmentType
+        );
 
         if(recruitments.isEmpty()) {
             throw RecruitmentsEmptyException.EXCEPTION;
@@ -61,14 +63,14 @@ public class RecruitmentService {
     }
 
     @Transactional(readOnly = true)
-    public RecruitmentResponse getRecruitmentById(
+    public RecruitmentDetailResponse getRecruitmentById(
             Long id
     ) {
         Recruitment recruitment = recruitmentRepository.findById(id)
                 .orElseThrow(() -> RecruitmentNotFoundException.EXCEPTION);
 
-        return new RecruitmentResponse(
-                recruitment.getId(), recruitment.getTitle(), recruitment.getClub().getName(), recruitment.getPosition(), recruitment.getEmploymentType()
+        return new RecruitmentDetailResponse(
+                recruitment.getTitle(), recruitment.getClub().getName(), recruitment.getPosition(), recruitment.getDetailContent(), recruitment.getEmploymentType()
         );
     }
 }

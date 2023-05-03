@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.global.secirity.jwt;
 
 import com.dgsw.cns.clubinsearch.domain.auth.domain.RefreshToken;
+import com.dgsw.cns.clubinsearch.domain.token.presentation.dto.response.AccessTokenResponse;
 import com.dgsw.cns.clubinsearch.global.properties.JwtProperties;
 import com.dgsw.cns.clubinsearch.global.redis.RedisService;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.enums.JwtType;
@@ -74,14 +75,14 @@ public class JwtTokenProvider {
         return token;
     }
 
-    public String refreshAccessToken(String refreshToken) {
+    public AccessTokenResponse refreshAccessToken(String refreshToken) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey(jwtProperties.getRefreshKey()))
                 .build()
                 .parseClaimsJws(refreshToken)
                 .getBody();
 
-        return createToken(claims.get("email", String.class), JwtType.ACCESS);
+        return new AccessTokenResponse(createToken(claims.get("email", String.class), JwtType.ACCESS));
     }
 
     public Claims validateToken(String accessToken) {

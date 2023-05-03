@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.domain.token.presentation;
 
 import com.dgsw.cns.clubinsearch.domain.token.presentation.dto.request.RefreshAccessTokenRequest;
+import com.dgsw.cns.clubinsearch.domain.token.presentation.dto.response.AccessTokenResponse;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ public class TokenController {
 
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.CREATED)
-    public String refreshAccessToken(
+    public AccessTokenResponse refreshAccessToken(
             @RequestBody RefreshAccessTokenRequest request
             ) {
         return jwtTokenProvider.refreshAccessToken(request.getRefreshToken());

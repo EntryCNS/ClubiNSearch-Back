@@ -76,13 +76,23 @@ public class JwtTokenProvider {
     }
 
     public AccessTokenResponse refreshAccessToken(String refreshToken) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey(jwtProperties.getRefreshKey()))
-                .build()
-                .parseClaimsJws(refreshToken)
-                .getBody();
-
-        return new AccessTokenResponse(createToken(claims.get("email", String.class), JwtType.ACCESS));
+        try {
+            return new AccessTokenResponse(
+                createToken(
+                         Jwts.parserBuilder()
+                        .setSigningKey(getSigningKey(jwtProperties.getRefreshKey()))
+                        .build()
+                        .parseClaimsJws(refreshToken)
+                        .getBody()
+                        .get("email" ,String.class)
+                        ,JwtType.ACCESS
+                )
+            );
+        } catch (ExpiredTokenException e) {
+            throw  ExpiredTokenException.EXCEPTION;
+        } catch (Exception e) {
+            throw InvalidTokenException.INVALID_TOKEN_EXCEPTION;
+        }
     }
 
     public Claims validateToken(String accessToken) {

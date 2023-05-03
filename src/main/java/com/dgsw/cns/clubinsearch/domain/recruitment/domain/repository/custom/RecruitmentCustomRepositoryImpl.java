@@ -19,27 +19,27 @@ public class RecruitmentCustomRepositoryImpl implements RecruitmentCustomReposit
              return jpaQueryFactory
                     .selectFrom(recruitment)
                     .where(
-                            eqClubName(clubName),
-                            eqSearch(search),
-                            eqPosition(position),
+                            containsClubName(clubName),
+                            containsSearch(search),
+                            containsPosition(position),
                             eqEmploymentType(employmentType)
                     )
                      .fetch();
         }
 
-        private BooleanExpression eqSearch(String search) {
+        private BooleanExpression containsSearch(String search) {
             return search.isEmpty() ? null : recruitment.title.contains(search);
         }
 
-        private BooleanExpression eqPosition(String position) {
-            return position.isEmpty() ? null : recruitment.position.eq(position);
+        private BooleanExpression containsPosition(String position) {
+            return position.isEmpty() ? null : recruitment.position.contains(position);
         }
 
         private BooleanExpression eqEmploymentType(EmploymentType employmentType) {
             return employmentType == null ? null : recruitment.employmentType.eq(employmentType);
         }
 
-        private BooleanExpression eqClubName(String clubName) {
-            return clubName.isEmpty() ? null : recruitment.club.name.eq(clubName);
+        private BooleanExpression containsClubName(String clubName) {
+            return clubName.isEmpty() ? null : recruitment.club.name.contains(clubName);
         }
 }

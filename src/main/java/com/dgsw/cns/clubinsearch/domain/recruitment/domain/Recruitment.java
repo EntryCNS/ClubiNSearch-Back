@@ -2,11 +2,16 @@ package com.dgsw.cns.clubinsearch.domain.recruitment.domain;
 
 import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.State;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.Resume;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +32,13 @@ public class Recruitment {
     private EmploymentType employmentType;
 
     private String detailContent;
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
+
+    @Enumerated(EnumType.STRING)
+    private State state;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)

@@ -7,6 +7,7 @@ import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.Re
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

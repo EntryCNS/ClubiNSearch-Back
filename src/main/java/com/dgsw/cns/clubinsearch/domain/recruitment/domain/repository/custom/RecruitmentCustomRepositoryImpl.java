@@ -2,6 +2,7 @@ package com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.custom;
 
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.State;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,8 @@ public class RecruitmentCustomRepositoryImpl implements RecruitmentCustomReposit
                             containsClubName(clubName),
                             containsSearch(search),
                             containsPosition(position),
-                            eqEmploymentType(employmentType)
+                            eqEmploymentType(employmentType),
+                            recruitment.state.eq(State.OPEN)
                     )
                      .fetch();
         }
@@ -42,4 +44,6 @@ public class RecruitmentCustomRepositoryImpl implements RecruitmentCustomReposit
         private BooleanExpression containsClubName(String clubName) {
             return clubName.isEmpty() ? null : recruitment.club.name.contains(clubName);
         }
+
+
 }

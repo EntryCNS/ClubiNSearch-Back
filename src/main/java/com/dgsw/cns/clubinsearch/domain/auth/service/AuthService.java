@@ -10,8 +10,8 @@ import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundUserEmailExceptio
 import com.dgsw.cns.clubinsearch.domain.user.exception.PasswordNotMatchesException;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.enums.JwtType;
-import com.dgsw.cns.clubinsearch.global.secirity.SecurityConfig;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final UserRepository userRepository;
 
-    private final SecurityConfig securityConfig;
+    private final PasswordEncoder passwordEncoder;
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -32,7 +32,7 @@ public class AuthService {
                 User.builder()
                         .accountId(request.getAccountId())
                         .email(request.getEmail())
-                        .password(securityConfig.passwordEncoder().encode(request.getPassword()))
+                        .password(passwordEncoder.encode(request.getPassword()))
                         .build()
         );
     }
@@ -41,7 +41,7 @@ public class AuthService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> NotFoundUserEmailException.EXCEPTION);
 
-        if(!securityConfig.passwordEncoder().matches(request.getPassword(), user.getPassword())) {
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw PasswordNotMatchesException.EXCEPTION;
         }
         String email = user.getEmail();

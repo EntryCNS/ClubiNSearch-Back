@@ -1,17 +1,15 @@
 package com.dgsw.cns.clubinsearch.domain.recruitment.presentation;
 
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
-import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
+import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.RecruitmentRequest;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentDetailResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.RecruitmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -24,7 +22,7 @@ public class RecruitmentController {
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public void crateRecruitment(
-            @RequestBody @Valid CreateRecruitmentRequest request
+            @RequestBody @Valid RecruitmentRequest request
             ) {
         recruitmentService.createRecruitment(request);
     }
@@ -46,5 +44,14 @@ public class RecruitmentController {
             @PathVariable Long id
     ) {
         return recruitmentService.getRecruitmentById(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateRecruitment(
+            @PathVariable Long id,
+            @RequestBody @Valid RecruitmentRequest request
+    ) {
+        recruitmentService.updateRecruitment(id, request);
     }
 }

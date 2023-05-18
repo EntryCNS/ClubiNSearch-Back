@@ -5,25 +5,19 @@ import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
 import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.EmploymentType;
+import com.dgsw.cns.clubinsearch.domain.recruitment.domain.enums.State;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.RecruitmentRepository;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentsEmptyException;
-import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.CreateRecruitmentRequest;
+import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.request.RecruitmentRequest;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentDetailResponse;
 import com.dgsw.cns.clubinsearch.domain.recruitment.presentation.dto.response.RecruitmentResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +29,7 @@ public class RecruitmentService {
     private final ClubRepository clubRepository;
 
     @Transactional
-    public void createRecruitment(CreateRecruitmentRequest request) {
+    public void createRecruitment(RecruitmentRequest request) {
         Recruitment recruitment = request.toEntity();
 
         Club club = clubRepository.findByName(request.getClubName())
@@ -44,6 +38,22 @@ public class RecruitmentService {
         club.addRecruitment(recruitment);
 
         recruitmentRepository.save(recruitment);
+    }
+
+    @Transactional
+    public void updateRecruitment(Long id, RecruitmentRequest request) {
+        Recruitment recruitment = recruitmentRepository.findById(id)
+                .orElseThrow(() -> RecruitmentNotFoundException.EXCEPTION);
+
+        recruitment.updateRecruitment(
+                request.getTitle(),
+                request.getPosition(),
+                request.getEmploymentType(),
+                request.getDetailContent(),
+                request.getStartDate(),
+                request.getEndDate(),
+                request.getIsOpen() ? State.OPEN : State.CLOSE
+        );
     }
 
     @Transactional(readOnly = true)

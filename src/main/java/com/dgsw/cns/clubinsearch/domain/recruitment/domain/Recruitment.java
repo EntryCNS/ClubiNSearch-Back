@@ -54,4 +54,13 @@ public class Recruitment {
         resumes.add(resume);
     }
 
+    public void updateRecruitment(String title, String position, EmploymentType employmentType, String detailContent, LocalDate startDate, LocalDate endDate, State state) {
+        this.title = title;
+        this.position = position;
+        this.employmentType = employmentType;
+        this.detailContent = detailContent;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.state = state;
+    }
 }

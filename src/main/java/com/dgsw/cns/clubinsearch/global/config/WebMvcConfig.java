@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.global.web;
+package com.dgsw.cns.clubinsearch.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

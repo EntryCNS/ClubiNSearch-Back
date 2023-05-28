@@ -7,7 +7,7 @@ import com.dgsw.cns.clubinsearch.domain.auth.presentation.dto.response.LoginResp
 import com.dgsw.cns.clubinsearch.domain.user.domain.User;
 import com.dgsw.cns.clubinsearch.domain.user.domain.repository.UserRepository;
 import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundUserEmailException;
-import com.dgsw.cns.clubinsearch.domain.user.exception.PasswordNotMatchesException;
+import com.dgsw.cns.clubinsearch.domain.user.exception.NotMatchesPasswordException;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.enums.JwtType;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,7 @@ public class AuthService {
                 .orElseThrow(() -> NotFoundUserEmailException.EXCEPTION);
 
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw PasswordNotMatchesException.EXCEPTION;
+            throw NotMatchesPasswordException.EXCEPTION;
         }
         String email = user.getEmail();
         return new LoginResponse(

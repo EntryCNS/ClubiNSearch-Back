@@ -18,6 +18,8 @@ public class User {
 
     private String accountId;
 
+    private String name;
+
     private String email;
 
     private String password;
@@ -26,10 +28,12 @@ public class User {
     private Role role;
 
     @Builder
-    public User(Long id, String accountId, String email, String password) {
+    public User(Long id, String accountId, String name, String email, String password, Role role) {
         this.id = id;
         this.accountId = accountId;
+        this.name = name;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 }

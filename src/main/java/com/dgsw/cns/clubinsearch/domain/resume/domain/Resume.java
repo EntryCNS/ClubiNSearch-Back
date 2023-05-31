@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.domain.resume.domain;
 
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
+import com.dgsw.cns.clubinsearch.domain.resume.domain.enums.State;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,8 +28,15 @@ public class Resume {
 
     private String fileUrl;
 
+    @Enumerated(EnumType.STRING)
+    private State state;
+
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recruitment_id")
     private Recruitment recruitment;
+
+    public void updateResumeState(State state) {
+        this.state = state;
+    }
 }

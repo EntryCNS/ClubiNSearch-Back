@@ -1,5 +1,6 @@
 package com.dgsw.cns.clubinsearch.domain.auth.service;
 
+import com.dgsw.cns.clubinsearch.domain.user.domain.enums.Role;
 import com.dgsw.cns.clubinsearch.domain.user.exception.ExistsUserEmailException;
 import com.dgsw.cns.clubinsearch.domain.auth.presentation.dto.request.CreateUserRequest;
 import com.dgsw.cns.clubinsearch.domain.auth.presentation.dto.request.LoginUserRequest;
@@ -31,8 +32,10 @@ public class AuthService {
         userRepository.save(
                 User.builder()
                         .accountId(request.getAccountId())
+                        .name(request.getName())
                         .email(request.getEmail())
                         .password(passwordEncoder.encode(request.getPassword()))
+                        .role(Role.ROLE_ADMIN)
                         .build()
         );
     }

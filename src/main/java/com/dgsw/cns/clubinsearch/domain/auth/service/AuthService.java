@@ -7,6 +7,7 @@ import com.dgsw.cns.clubinsearch.domain.auth.presentation.dto.request.LoginUserR
 import com.dgsw.cns.clubinsearch.domain.auth.presentation.dto.response.LoginResponse;
 import com.dgsw.cns.clubinsearch.domain.user.domain.User;
 import com.dgsw.cns.clubinsearch.domain.user.domain.repository.UserRepository;
+import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundAccountIdException;
 import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundUserEmailException;
 import com.dgsw.cns.clubinsearch.domain.user.exception.NotMatchesPasswordException;
 import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
@@ -41,8 +42,8 @@ public class AuthService {
     }
 
     public LoginResponse loginUser(LoginUserRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> NotFoundUserEmailException.EXCEPTION);
+        User user = userRepository.findByAccountId(request.getAccountId())
+                .orElseThrow(() -> NotFoundAccountIdException.EXCEPTION);
 
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw NotMatchesPasswordException.EXCEPTION;

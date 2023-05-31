@@ -54,9 +54,12 @@ public class SecurityConfig {
 
                 .antMatchers("/api/auth/**").permitAll()
 
-                .antMatchers("/api/recruitment/", "api/recruitment/{id}").permitAll()
+                .antMatchers("/api/recruitment/").permitAll()
+                .antMatchers("/api/recruitment/**").permitAll()
+                .antMatchers("/api/recruitment/{id}").permitAll()
 
                 .antMatchers("/api/resume/submit").permitAll()
+                .antMatchers("/api/resume/admin/**").hasRole(Role.ROLE_ADMIN.getRole())
 
                 .antMatchers("/api/token/refresh").permitAll()
 

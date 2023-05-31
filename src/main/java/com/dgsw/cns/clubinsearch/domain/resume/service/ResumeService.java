@@ -4,6 +4,7 @@ import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.repository.RecruitmentRepository;
 import com.dgsw.cns.clubinsearch.domain.recruitment.exception.RecruitmentNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.Resume;
+import com.dgsw.cns.clubinsearch.domain.resume.domain.enums.State;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.repository.ResumeRepository;
 import com.dgsw.cns.clubinsearch.domain.resume.exception.ResumeListEmptyException;
 import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.request.SubmitResumeRequest;
@@ -36,6 +37,7 @@ public class ResumeService {
                 .introduction(request.getIntroduction())
                 .link(request.getLink())
                 .fileUrl(s3Service.uploadFile(Dir.RESUME, request.getFile()))
+                .state(State.SUBMIT)
                 .build();
 
         recruitment.addResume(resume);
@@ -49,7 +51,7 @@ public class ResumeService {
             throw ResumeListEmptyException.EXCEPTION;
         }
         return resumeList.stream().map(
-                it -> new ResumeResponse(it.getId(), it.getName(), it.getStudentNo(), it.getContact(), it.getIntroduction(), it.getLink())
+                it -> new ResumeResponse(it.getId(), it.getName(), it.getStudentNo(), it.getContact(), it.getIntroduction(), it.getLink(), it.getFileUrl(), it.getState())
         ).collect(Collectors.toList());
     }
 

@@ -21,7 +21,7 @@ public class ResumeController {
     @ResponseStatus(HttpStatus.CREATED)
     public void submitResume(
             @ModelAttribute SubmitResumeRequest request) {
-        resumeService.  submitResume(request);
+        resumeService.submitResume(request);
     }
 
     @GetMapping("/list/{recruitmentId}")
@@ -31,4 +31,5 @@ public class ResumeController {
     ) {
         return resumeService.getResumeListByRecruitmentId(recruitmentId);
     }
+
 }

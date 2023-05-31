@@ -1,5 +1,6 @@
 package com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.response;
 
+import com.dgsw.cns.clubinsearch.domain.resume.domain.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,5 +18,9 @@ public class ResumeResponse {
     private String introduction;
 
     private String link;
+
+    private String fileUrl;
+
+    private State state;
 
 }

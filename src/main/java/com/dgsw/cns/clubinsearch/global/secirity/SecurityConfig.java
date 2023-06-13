@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +19,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -44,10 +50,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure (HttpSecurity http) throws Exception {
         http
+                .httpBasic().disable()
                 .formLogin().disable()
                 .csrf().disable()
-                .cors().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+
+                .cors()
+                .configurationSource(request -> {
+                    var cors = new CorsConfiguration();
+                    cors.setAllowedOrigins(List.of("*"));
+                    cors.setAllowedMethods(List.of(
+                            HttpMethod.GET.name(),
+                            HttpMethod.HEAD.name(),
+                            HttpMethod.POST.name(),
+                            HttpMethod.PUT.name(),
+                            HttpMethod.DELETE.name(),
+                            HttpMethod.PATCH.name()
+                            ));
+                    cors.setAllowedHeaders(
+                            List.of(
+                                    "Access-Control-Allow-Origin",
+                                    "Content-Type",
+                                    "Authorization"
+                            )
+                    );
+                    cors.setMaxAge(3000L);
+                    return cors;
+                })
 
                 .and()
                 .authorizeRequests()

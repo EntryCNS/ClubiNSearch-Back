@@ -14,8 +14,11 @@ import com.dgsw.cns.clubinsearch.thirdparty.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -47,12 +50,33 @@ public class ResumeService {
 
     public List<ResumeResponse> getResumeListByRecruitmentId(Long recruitmentId) {
         List<Resume> resumeList = resumeRepository.findAllByRecruitment_Id(recruitmentId);
-        if(resumeList.isEmpty()) {
+        if (resumeList.isEmpty()) {
             throw ResumeListEmptyException.EXCEPTION;
         }
-        return resumeList.stream().map(
-                it -> new ResumeResponse(it.getId(), it.getName(), it.getStudentNo(), it.getContact(), it.getIntroduction(), it.getLink(), it.getFileUrl(), it.getState())
-        ).collect(Collectors.toList());
+
+        List<ResumeResponse> resumeResponseList = new ArrayList<>();
+
+        resumeResponseList.add(createResumeResponse(State.SUBMIT, resumeList));
+        resumeResponseList.add(createResumeResponse(State.INTERVIEW, resumeList));
+        resumeResponseList.add(createResumeResponse(State.FINAL, resumeList));
+
+        return resumeResponseList;
     }
 
+    private ResumeResponse createResumeResponse(State state, List<Resume> resumeList) {
+        List<ResumeResponse.MemberResponse> memberResponseList = resumeList.stream()
+                .filter(resume -> resume.getState().equals(state))
+                .map(resume -> new ResumeResponse.MemberResponse(
+                        resume.getId(),
+                        resume.getName(),
+                        resume.getStudentNo(),
+                        resume.getContact(),
+                        resume.getIntroduction(),
+                        resume.getLink(),
+                        resume.getFileUrl()
+                ))
+                .collect(Collectors.toList());
+
+        return new ResumeResponse(state, memberResponseList);
+    }
 }

@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.global.querydsl;
+package com.dgsw.cns.clubinsearch.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

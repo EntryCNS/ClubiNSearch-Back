@@ -6,6 +6,7 @@ import com.dgsw.cns.clubinsearch.domain.resume.exception.NotFoundResumeException
 import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.request.UpdateResumeStateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -14,11 +15,11 @@ import java.util.Optional;
 public class UpdateResumeStateService {
     private final ResumeRepository resumeRepository;
 
+    @Transactional
      public void execute(UpdateResumeStateRequest request) {
          Resume resume = resumeRepository.findById(request.getId())
                  .orElseThrow(() -> NotFoundResumeException.EXCEPTION);
          resume.updateResumeState(request.getState());
      }
-
 
 }

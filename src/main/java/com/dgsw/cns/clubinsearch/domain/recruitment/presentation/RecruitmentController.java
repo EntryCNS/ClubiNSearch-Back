@@ -46,6 +46,7 @@ public class RecruitmentController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public RecruitmentDetailResponse getRecruitmentById(
             @PathVariable Long id
     ) {

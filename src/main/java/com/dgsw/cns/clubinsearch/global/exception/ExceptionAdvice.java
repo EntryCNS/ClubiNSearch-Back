@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 @RestControllerAdvice
-@Slf4j
 public class ExceptionAdvice {
 
     @ExceptionHandler(BusinessException.class)

@@ -12,11 +12,11 @@ import org.springframework.data.redis.core.RedisHash;
 public class RefreshToken {
     @Id
     private String refreshToken;
-    private String email;
+    private String accountId;
 
     @Builder
-    public RefreshToken(String refreshToken, String email) {
+    public RefreshToken(String refreshToken, String accountId) {
         this.refreshToken = refreshToken;
-        this.email = email;
+        this.accountId = accountId;
     }
 }

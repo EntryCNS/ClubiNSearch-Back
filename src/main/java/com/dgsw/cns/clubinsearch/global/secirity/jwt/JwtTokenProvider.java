@@ -31,9 +31,9 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String createToken(String email, JwtType type) {
+    public String createToken(String accountId, JwtType type) {
         Claims claims = Jwts.claims();
-        claims.put("email", email);
+        claims.put("accountId", accountId);
 
         Long exp = 0L;
         String secretKey = "";
@@ -67,7 +67,7 @@ public class JwtTokenProvider {
             redisService.save(
                     RefreshToken.builder()
                             .refreshToken(token)
-                            .email(email)
+                            .accountId(accountId)
                             .build()
             );
         }
@@ -84,7 +84,7 @@ public class JwtTokenProvider {
                         .build()
                         .parseClaimsJws(refreshToken)
                         .getBody()
-                        .get("email" ,String.class)
+                        .get("accountId" ,String.class)
                         ,JwtType.ACCESS
                 )
             );

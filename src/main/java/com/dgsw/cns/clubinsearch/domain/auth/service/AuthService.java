@@ -48,10 +48,10 @@ public class AuthService {
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw NotMatchesPasswordException.EXCEPTION;
         }
-        String email = user.getEmail();
+
         return new LoginResponse(
-                jwtTokenProvider.createToken(email, JwtType.ACCESS),
-                jwtTokenProvider.createToken(email, JwtType.REFRESH)
+                jwtTokenProvider.createToken(request.getAccountId(), JwtType.ACCESS),
+                jwtTokenProvider.createToken(request.getAccountId(), JwtType.REFRESH)
         );
     }
 

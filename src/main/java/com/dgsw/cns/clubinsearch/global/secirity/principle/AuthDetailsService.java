@@ -1,6 +1,7 @@
 package com.dgsw.cns.clubinsearch.global.secirity.principle;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.repository.UserRepository;
+import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundAccountIdException;
 import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundUserEmailException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +17,9 @@ public class AuthDetailsService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
+        return userRepository.findByAccountId(accountId)
                 .map(AuthDetails::new)
-                .orElseThrow(() -> NotFoundUserEmailException.EXCEPTION);
+                .orElseThrow(() -> NotFoundAccountIdException.EXCEPTION);
     }
 }

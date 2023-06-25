@@ -20,9 +20,6 @@ public class QueryResumeListService {
 
     public List<ResumeResponse> execute(Long recruitmentId) {
         List<Resume> resumeList = resumeRepository.findAllByRecruitment_Id(recruitmentId);
-        if (resumeList.isEmpty()) {
-            throw ResumeListEmptyException.EXCEPTION;
-        }
 
         List<ResumeResponse> resumeResponseList = new ArrayList<>();
 

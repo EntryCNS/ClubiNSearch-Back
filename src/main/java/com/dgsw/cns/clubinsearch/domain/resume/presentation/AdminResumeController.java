@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api/resume/admin")
+@RequestMapping ("/api/admin/resume")
 @RequiredArgsConstructor
 public class AdminResumeController {
     private final UpdateResumeStateService updateResumeStateService;
@@ -31,6 +31,5 @@ public class AdminResumeController {
     public void updateResumeState(@RequestBody UpdateResumeStateRequest request) {
         updateResumeStateService.execute(request);
     }
-
 
 }

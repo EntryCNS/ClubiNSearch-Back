@@ -19,6 +19,8 @@ public class Club {
 
     private String name;
 
+    private String profile;
+
     @Builder.Default
     @OneToMany(mappedBy = "club", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -27,5 +29,9 @@ public class Club {
     public void addRecruitment(Recruitment recruitment) {
         recruitment.setClub(this);
         recruitments.add(recruitment);
+    }
+
+    public void updateProfile(String profileUrl) {
+        this.profile = profileUrl;
     }
 }

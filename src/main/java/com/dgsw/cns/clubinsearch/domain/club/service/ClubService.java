@@ -3,7 +3,7 @@ package com.dgsw.cns.clubinsearch.domain.club.service;
 import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
 import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
 import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNameExistsException;
-import com.dgsw.cns.clubinsearch.domain.club.presentation.dto.RegisterClubRequest;
+import com.dgsw.cns.clubinsearch.domain.club.presentation.dto.request.RegisterClubRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -15,7 +15,7 @@ public class RedisService {
 
     public void save(RefreshToken refreshToken) {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(refreshToken.getRefreshToken(), refreshToken.getEmail());
+        valueOperations.set(refreshToken.getRefreshToken(), refreshToken.getAccountId());
         redisTemplate.expire(refreshToken.getRefreshToken(), 3600L, TimeUnit.SECONDS);
     }
 }

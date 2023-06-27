@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.domain.club.presentation.dto;
+package com.dgsw.cns.clubinsearch.domain.club.presentation.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;

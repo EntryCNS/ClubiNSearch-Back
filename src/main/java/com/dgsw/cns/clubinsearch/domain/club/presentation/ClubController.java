@@ -4,8 +4,8 @@ import com.dgsw.cns.clubinsearch.domain.club.presentation.dto.request.AddClubPro
 import com.dgsw.cns.clubinsearch.domain.club.presentation.dto.request.RegisterClubRequest;
 import com.dgsw.cns.clubinsearch.domain.club.presentation.dto.response.ClubProfileResponse;
 import com.dgsw.cns.clubinsearch.domain.club.service.AddClubProfileService;
-import com.dgsw.cns.clubinsearch.domain.club.service.ClubService;
 import com.dgsw.cns.clubinsearch.domain.club.service.QueryClubProfileService;
+import com.dgsw.cns.clubinsearch.domain.club.service.RegisterClubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/club")
 public class ClubController {
 
-    private final ClubService clubService;
+    private final RegisterClubService registerClubService;
 
     private final AddClubProfileService addClubProfileService;
 
@@ -28,7 +28,7 @@ public class ClubController {
     public void registerClub(
             @RequestBody @Valid RegisterClubRequest request
             ) {
-        clubService.registerClub(request);
+        registerClubService.execute(request);
     }
 
     @PostMapping("/profile")

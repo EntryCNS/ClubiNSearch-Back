@@ -5,15 +5,21 @@ import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
 import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNameExistsException;
 import com.dgsw.cns.clubinsearch.domain.club.presentation.dto.request.RegisterClubRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ClubService {
+public class RegisterClubService {
 
     private final ClubRepository clubRepository;
 
-    public void registerClub(RegisterClubRequest request) {
+    @Value("${app.club.profile}")
+    private String basicProfile;
+
+    @Transactional
+    public void execute(RegisterClubRequest request) {
 
         if(clubRepository.existsByName(request.getClubName())) {
             throw ClubNameExistsException.EXCEPTION;
@@ -21,10 +27,10 @@ public class ClubService {
 
         Club club = Club.builder()
                 .name(request.getClubName())
+                .profile(basicProfile)
                 .build();
 
         clubRepository.save(club);
-
     }
 
 }

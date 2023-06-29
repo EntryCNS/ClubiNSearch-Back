@@ -15,8 +15,8 @@ public class QueryClubProfileService {
     private final ClubRepository clubRepository;
 
     @Transactional(readOnly = true)
-    public ClubProfileResponse execute(Long id) {
-        Club club = clubRepository.findById(id)
+    public ClubProfileResponse execute(String clubName) {
+        Club club = clubRepository.findByName(clubName)
                 .orElseThrow(() -> ClubNotFoundException.EXCEPTION);
 
         return new ClubProfileResponse(

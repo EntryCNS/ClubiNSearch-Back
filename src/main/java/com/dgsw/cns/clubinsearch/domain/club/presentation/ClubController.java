@@ -39,12 +39,12 @@ public class ClubController {
         addClubProfileService.execute(request);
     }
 
-    @GetMapping("/profile/{clubId}")
+    @GetMapping("/profile/{clubName}")
     @ResponseStatus(HttpStatus.OK)
     public ClubProfileResponse getProfile(
-            @PathVariable("clubId") Long clubId
+            @PathVariable("clubName") String clubName
             ) {
-        return queryClubProfileService.execute(clubId);
+        return queryClubProfileService.execute(clubName);
     }
 
 }

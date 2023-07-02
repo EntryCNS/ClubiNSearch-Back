@@ -1,12 +1,12 @@
-package com.dgsw.cns.clubinsearch.global.secirity.jwt;
+package com.dgsw.cns.clubinsearch.global.security.jwt;
 
 import com.dgsw.cns.clubinsearch.domain.auth.domain.RefreshToken;
 import com.dgsw.cns.clubinsearch.domain.token.presentation.dto.response.AccessTokenResponse;
 import com.dgsw.cns.clubinsearch.global.properties.JwtProperties;
 import com.dgsw.cns.clubinsearch.global.redis.RedisService;
-import com.dgsw.cns.clubinsearch.global.secirity.jwt.enums.JwtType;
-import com.dgsw.cns.clubinsearch.global.secirity.jwt.exception.ExpiredTokenException;
-import com.dgsw.cns.clubinsearch.global.secirity.jwt.exception.InvalidTokenException;
+import com.dgsw.cns.clubinsearch.global.security.jwt.enums.JwtType;
+import com.dgsw.cns.clubinsearch.global.security.jwt.exception.ExpiredTokenException;
+import com.dgsw.cns.clubinsearch.global.security.jwt.exception.InvalidTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;

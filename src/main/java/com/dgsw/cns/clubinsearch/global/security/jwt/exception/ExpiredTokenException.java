@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.global.secirity.jwt.exception;
+package com.dgsw.cns.clubinsearch.global.security.jwt.exception;
 
 import com.dgsw.cns.clubinsearch.global.exception.BusinessException;
 import org.springframework.http.HttpStatus;

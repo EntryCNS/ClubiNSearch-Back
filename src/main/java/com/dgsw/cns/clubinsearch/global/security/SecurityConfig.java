@@ -1,18 +1,15 @@
-package com.dgsw.cns.clubinsearch.global.secirity;
+package com.dgsw.cns.clubinsearch.global.security;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.enums.Role;
 import com.dgsw.cns.clubinsearch.global.filter.config.FilterConfig;
-import com.dgsw.cns.clubinsearch.global.secirity.principle.AuthDetailsService;
-import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
+import com.dgsw.cns.clubinsearch.global.security.principle.AuthDetailsService;
+import com.dgsw.cns.clubinsearch.global.security.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;

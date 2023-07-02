@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.global.secirity.principle;
+package com.dgsw.cns.clubinsearch.global.security.principle;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.User;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package com.dgsw.cns.clubinsearch.domain.token.presentation;
 
 import com.dgsw.cns.clubinsearch.domain.token.presentation.dto.request.RefreshAccessTokenRequest;
 import com.dgsw.cns.clubinsearch.domain.token.presentation.dto.response.AccessTokenResponse;
-import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
+import com.dgsw.cns.clubinsearch.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

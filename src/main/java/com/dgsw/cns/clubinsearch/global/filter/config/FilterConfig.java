@@ -2,8 +2,8 @@ package com.dgsw.cns.clubinsearch.global.filter.config;
 
 import com.dgsw.cns.clubinsearch.global.filter.ExceptionFilter;
 import com.dgsw.cns.clubinsearch.global.filter.JwtFilter;
-import com.dgsw.cns.clubinsearch.global.secirity.jwt.JwtTokenProvider;
-import com.dgsw.cns.clubinsearch.global.secirity.principle.AuthDetailsService;
+import com.dgsw.cns.clubinsearch.global.security.jwt.JwtTokenProvider;
+import com.dgsw.cns.clubinsearch.global.security.principle.AuthDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

@@ -1,10 +1,8 @@
-package com.dgsw.cns.clubinsearch.global.secirity.principle;
+package com.dgsw.cns.clubinsearch.global.security.principle;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.repository.UserRepository;
 import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundAccountIdException;
-import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundUserEmailException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -22,7 +22,6 @@ public class AddClubProfileService {
     public void execute(
             AddClubProfileRequest request
     ) {
-
         Club club = clubRepository.findById(request.getClubId())
                 .orElseThrow(() -> ClubNotFoundException.EXCEPTION);
 

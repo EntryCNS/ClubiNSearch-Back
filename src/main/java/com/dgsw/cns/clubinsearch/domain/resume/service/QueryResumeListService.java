@@ -7,6 +7,7 @@ import com.dgsw.cns.clubinsearch.domain.resume.exception.ResumeListEmptyExceptio
 import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.response.ResumeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class QueryResumeListService {
 
     private final ResumeRepository resumeRepository;
 
+    @Transactional(readOnly = true)
     public List<ResumeResponse> execute(Long recruitmentId) {
         List<Resume> resumeList = resumeRepository.findAllByRecruitment_Id(recruitmentId);
 

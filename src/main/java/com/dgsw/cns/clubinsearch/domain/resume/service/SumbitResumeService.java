@@ -13,6 +13,7 @@ import com.dgsw.cns.clubinsearch.thirdparty.s3.enums.Dir;
 import com.dgsw.cns.clubinsearch.thirdparty.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +30,8 @@ public class SumbitResumeService {
     private final RecruitmentRepository recruitmentRepository;
 
     private final S3Service s3Service;
+
+    @Transactional
     public void execute(SubmitResumeRequest request) {
         Recruitment recruitment = recruitmentRepository.findById(request.getRecruitmentId())
                 .orElseThrow(() -> RecruitmentNotFoundException.EXCEPTION);

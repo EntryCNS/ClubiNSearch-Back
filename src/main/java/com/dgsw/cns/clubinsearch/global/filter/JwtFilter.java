@@ -1,6 +1,6 @@
 package com.dgsw.cns.clubinsearch.global.filter;
 
-import com.dgsw.cns.clubinsearch.global.security.principle.AuthDetailsService;
+import com.dgsw.cns.clubinsearch.global.security.principal.AuthDetailsService;
 import com.dgsw.cns.clubinsearch.global.security.jwt.JwtTokenProvider;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;

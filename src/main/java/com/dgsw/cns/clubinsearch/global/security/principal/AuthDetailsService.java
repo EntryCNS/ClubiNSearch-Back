@@ -1,4 +1,4 @@
-package com.dgsw.cns.clubinsearch.global.security.principle;
+package com.dgsw.cns.clubinsearch.global.security.principal;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.repository.UserRepository;
 import com.dgsw.cns.clubinsearch.domain.user.exception.NotFoundAccountIdException;

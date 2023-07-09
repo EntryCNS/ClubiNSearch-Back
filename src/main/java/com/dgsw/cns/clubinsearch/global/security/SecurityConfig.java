@@ -2,7 +2,7 @@ package com.dgsw.cns.clubinsearch.global.security;
 
 import com.dgsw.cns.clubinsearch.domain.user.domain.enums.Role;
 import com.dgsw.cns.clubinsearch.global.filter.config.FilterConfig;
-import com.dgsw.cns.clubinsearch.global.security.principle.AuthDetailsService;
+import com.dgsw.cns.clubinsearch.global.security.principal.AuthDetailsService;
 import com.dgsw.cns.clubinsearch.global.security.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

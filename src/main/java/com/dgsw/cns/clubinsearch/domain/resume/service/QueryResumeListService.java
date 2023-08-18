@@ -1,11 +1,19 @@
 package com.dgsw.cns.clubinsearch.domain.resume.service;
 
+import com.dgsw.cns.clubinsearch.domain.club.domain.Club;
+import com.dgsw.cns.clubinsearch.domain.club.domain.repository.ClubRepository;
+import com.dgsw.cns.clubinsearch.domain.club.exception.ClubNotFoundException;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.Resume;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.enums.State;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.repository.ResumeRepository;
 import com.dgsw.cns.clubinsearch.domain.resume.exception.ResumeListEmptyException;
 import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.response.ResumeResponse;
+import com.dgsw.cns.clubinsearch.domain.user.domain.User;
+import com.dgsw.cns.clubinsearch.domain.user.facade.UserFacade;
+import com.dgsw.cns.clubinsearch.global.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +28,9 @@ public class QueryResumeListService {
     private final ResumeRepository resumeRepository;
 
     @Transactional(readOnly = true)
-    public List<ResumeResponse> execute(Long recruitmentId) {
+    public List<ResumeResponse> execute(
+            Long recruitmentId
+    ) {
         List<Resume> resumeList = resumeRepository.findAllByRecruitment_Id(recruitmentId);
 
         List<ResumeResponse> resumeResponseList = new ArrayList<>();

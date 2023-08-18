@@ -8,6 +8,7 @@ import com.dgsw.cns.clubinsearch.domain.recruitment.service.CreateRecruitmentSer
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.QueryRecruitmentDetailService;
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.QueryRecruitmentListService;
 import com.dgsw.cns.clubinsearch.domain.recruitment.service.UpdateRecruitmentService;
+import com.dgsw.cns.clubinsearch.global.annotation.ClubAuth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.http.HttpStatus;

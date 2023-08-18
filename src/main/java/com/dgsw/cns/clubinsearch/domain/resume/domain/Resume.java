@@ -3,6 +3,7 @@ package com.dgsw.cns.clubinsearch.domain.resume.domain;
 import com.dgsw.cns.clubinsearch.domain.recruitment.domain.Recruitment;
 import com.dgsw.cns.clubinsearch.domain.resume.domain.enums.State;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 
@@ -35,6 +36,7 @@ public class Resume {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recruitment_id")
     private Recruitment recruitment;
+
 
     public void updateResumeState(State state) {
         this.state = state;

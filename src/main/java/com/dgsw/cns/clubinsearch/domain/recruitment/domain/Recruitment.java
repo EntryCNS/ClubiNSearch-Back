@@ -42,7 +42,6 @@ public class Recruitment {
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
     @JoinColumn(name = "club_id")
     private Club club;
 
@@ -54,7 +53,15 @@ public class Recruitment {
         resumes.add(resume);
     }
 
-    public void updateRecruitment(String title, String position, EmploymentType employmentType, String detailContent, LocalDate startDate, LocalDate endDate, State state) {
+    public void updateRecruitment(
+            String title,
+            String position,
+            EmploymentType employmentType,
+            String detailContent,
+            LocalDate startDate,
+            LocalDate endDate,
+            State state
+    ) {
         this.title = title;
         this.position = position;
         this.employmentType = employmentType;

@@ -12,6 +12,4 @@ import org.springframework.context.annotation.Configuration;
 public class JwtProperties {
     private String accessKey;
     private String refreshKey;
-    private Long refreshExp;
-    private Long accessExp;
 }

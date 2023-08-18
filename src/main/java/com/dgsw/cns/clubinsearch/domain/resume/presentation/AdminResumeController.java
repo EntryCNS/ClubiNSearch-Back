@@ -4,6 +4,7 @@ import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.request.UpdateRe
 import com.dgsw.cns.clubinsearch.domain.resume.presentation.dto.response.ResumeResponse;
 import com.dgsw.cns.clubinsearch.domain.resume.service.QueryResumeListService;
 import com.dgsw.cns.clubinsearch.domain.resume.service.UpdateResumeStateService;
+import com.dgsw.cns.clubinsearch.global.annotation.ClubAuth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class AdminResumeController {
 
     private final QueryResumeListService queryResumeListService;
 
+    @ClubAuth
     @GetMapping("/list/{recruitmentId}")
     @ResponseStatus(HttpStatus.OK)
     public List<ResumeResponse> getResumeListByRecruitmentId(
@@ -26,6 +28,7 @@ public class AdminResumeController {
         return queryResumeListService.execute(recruitmentId);
     }
 
+    @ClubAuth
     @PostMapping("/state")
     @ResponseStatus(HttpStatus.OK)
     public void updateResumeState(@RequestBody UpdateResumeStateRequest request) {

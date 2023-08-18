@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,31 +37,31 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims();
         claims.put("accountId", accountId);
 
-        Long exp = 0L;
         String secretKey = "";
+
+        Instant now = Instant.now();
+        Duration exp = Duration.ZERO;
 
         switch (type) {
             case ACCESS:
                 claims.put("type", type);
                 secretKey = jwtProperties.getAccessKey();
-                exp = jwtProperties.getAccessExp();
+                exp.plus(Duration.ofDays(1));
                 break;
             case REFRESH:
                 claims.put("type", type);
                 secretKey = jwtProperties.getRefreshKey();
-                exp = jwtProperties.getRefreshExp();
+                exp.plus(Duration.ofDays(7));
                 break;
         }
 
-        Date now = new Date();
         Map<String, Object> header = new HashMap<>();
         header.put("type", "JWT");
 
         String token = Jwts.builder()
                 .setHeader(header)
                 .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + exp))
+                .setExpiration(Date.from(now.plus(exp)))
                 .signWith(getSigningKey(secretKey), SignatureAlgorithm.HS256)
                 .compact();
 

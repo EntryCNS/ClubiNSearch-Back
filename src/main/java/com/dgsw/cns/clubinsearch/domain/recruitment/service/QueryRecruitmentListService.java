@@ -33,7 +33,7 @@ public class QueryRecruitmentListService {
         }
 
         return recruitments.stream().map(
-                it -> new RecruitmentResponse(it.getId(), it.getTitle(), it.getClub().getName(), it.getPosition(), it.getEmploymentType())
+                it -> new RecruitmentResponse(it.getId(), it.getTitle(), it.getClub().getName(), it.getPosition(), it.getEmploymentType().getValue())
         ).collect(Collectors.toList());
     }
 

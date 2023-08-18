@@ -12,12 +12,18 @@ public class RecruitmentDetailResponse {
 
     private String title;
 
+    private Long clubId;
+
     private String clubName;
 
     private String position;
 
     private String detailContent;
 
-    private EmploymentType employmentType;
+    private String employmentType;
+
+    private String startDate;
+
+    private String endDate;
 
 }

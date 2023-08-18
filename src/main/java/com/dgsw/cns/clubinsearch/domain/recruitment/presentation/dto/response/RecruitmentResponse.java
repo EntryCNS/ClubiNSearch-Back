@@ -21,6 +21,6 @@ public class RecruitmentResponse {
 
     private String position;
 
-    private EmploymentType employmentType;
+    private String employmentType;
 
 }

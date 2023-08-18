@@ -14,7 +14,6 @@ public class QueryRecruitmentDetailService {
 
     private final RecruitmentRepository recruitmentRepository;
 
-
     @Transactional(readOnly = true)
     public RecruitmentDetailResponse execute(
             Long id
@@ -23,7 +22,14 @@ public class QueryRecruitmentDetailService {
                 .orElseThrow(() -> RecruitmentNotFoundException.EXCEPTION);
 
         return new RecruitmentDetailResponse(
-                recruitment.getTitle(), recruitment.getClub().getName(), recruitment.getPosition(), recruitment.getDetailContent(), recruitment.getEmploymentType()
+                recruitment.getTitle(),
+                recruitment.getClub().getId(),
+                recruitment.getClub().getName(),
+                recruitment.getPosition(),
+                recruitment.getDetailContent(),
+                recruitment.getEmploymentType().getValue(),
+                recruitment.getStartDate().toString(),
+                recruitment.getEndDate().toString()
         );
     }
 
